@@ -1,0 +1,8 @@
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.env
+nlu-service/models/
+rasa-bot/models/
+rasa-bot/.rasa/

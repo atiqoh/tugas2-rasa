@@ -1,0 +1,28 @@
+# =============================================================================
+# endpoints.yml
+# =============================================================================
+
+# Custom actions dijalankan langsung di dalam proses Rasa Pro (tanpa `rasa run actions`).
+# Jika versi Rasa Anda tidak mendukung `actions_module`, ganti dengan baris `url`
+# lalu jalankan action server terpisah:  rasa run actions --port 5055
+action_endpoint:
+  actions_module: "actions"
+  # url: "http://localhost:5055/webhook"
+
+# NLU eksternal: Rasa (RasaNLUHttpInterpreter) akan POST ke {url}/model/parse
+# untuk SETIAP pesan pengguna, termasuk payload tombol seperti "/check_stock".
+nlu:
+  url: "http://localhost:3000"
+
+# (Opsional, bab 6) Rephrase respons dengan LLM lokal via Ollama. Dimatikan secara default
+# karena respons berisi data stok/harga yang tidak boleh diubah oleh LLM.
+# nlg:
+#   type: rephrase
+#   llm:
+#     model_group: local_llm
+# model_groups:
+#   - id: local_llm
+#     models:
+#       - provider: ollama
+#         model: qwen3:0.6b
+#         api_base: http://localhost:11434

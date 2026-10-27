@@ -1,0 +1,207 @@
+version: "3.1"
+
+# =============================================================================
+# domain.yml - "jantung" chatbot admin OlshopKu
+# Intent & entity di sini HARUS sama persis dengan label yang dihasilkan NLU service
+# (nlu-service/models/olshop_intent_model/config.json -> id2label).
+# =============================================================================
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - thank_you
+  - bot_challenge
+  - check_stock
+  - ask_price
+  - ask_product_info
+  - browse_category
+  - check_order_status
+  - check_customer_data
+  - provide_order_id
+  - provide_email
+  - ask_delivery_info
+  - ask_return_policy
+  - contact_admin
+  - transaction_out_of_scope
+  - out_of_scope
+  # nlu_fallback & session_start adalah intent bawaan Rasa (tidak perlu ditulis)
+
+entities:
+  - product:
+      influence_conversation: false
+  - category:
+      influence_conversation: false
+  - order_id:
+      influence_conversation: false
+  - email:
+      influence_conversation: false
+
+slots:
+  product:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: product
+      # Saat form menanyakan nama produk, seluruh teks jawaban dipakai sebagai kandidat
+      # (lalu divalidasi ke database oleh validate_product_form).
+      - type: from_text
+        intent: [check_stock, ask_price, ask_product_info, nlu_fallback]
+        conditions:
+          - active_loop: product_form
+            requested_slot: product
+
+  # Jenis pertanyaan produk; hanya diisi saat TIDAK ada form aktif supaya jawaban
+  # "iPhone X" di tengah form harga tidak mengubah jenisnya menjadi "stock".
+  product_query_type:
+    type: categorical
+    values: [stock, price, info]
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: check_stock
+        value: stock
+        conditions:
+          - active_loop: null
+      - type: from_intent
+        intent: ask_price
+        value: price
+        conditions:
+          - active_loop: null
+      - type: from_intent
+        intent: ask_product_info
+        value: info
+        conditions:
+          - active_loop: null
+
+  category:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: category
+
+  order_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: order_id
+      - type: from_text
+        intent: [provide_order_id, check_order_status, nlu_fallback]
+        conditions:
+          - active_loop: order_status_form
+            requested_slot: order_id
+
+  customer_email:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: email
+      - type: from_text
+        intent: [provide_email, check_customer_data, check_order_status, nlu_fallback]
+        conditions:
+          - active_loop: order_status_form
+            requested_slot: customer_email
+          - active_loop: customer_data_form
+            requested_slot: customer_email
+
+forms:
+  product_form:
+    required_slots:
+      - product
+  order_status_form:
+    required_slots:
+      - order_id
+      - customer_email
+  customer_data_form:
+    required_slots:
+      - customer_email
+
+actions:
+  - action_product_lookup
+  - action_browse_category
+  - action_check_order_status
+  - action_check_customer_data
+  - validate_product_form
+  - validate_order_status_form
+  - validate_customer_data_form
+
+responses:
+  utter_greet:
+    - text: "Halo kak! 👋 Aku Mimin, admin virtual OlshopKu. Mau dibantu apa hari ini?"
+      buttons:
+        - title: "Cek stok produk"
+          payload: "/check_stock"
+        - title: "Lihat kategori"
+          payload: "/browse_category"
+        - title: "Status pesanan"
+          payload: "/check_order_status"
+        - title: "Data akun saya"
+          payload: "/check_customer_data"
+
+  utter_how_can_help:
+    - text: "Siap kak, silakan tanya saja: stok, harga, info produk, kategori, status pesanan, atau data akun 😊"
+
+  utter_anything_else:
+    - text: "Ada lagi yang bisa Mimin bantu, kak?"
+
+  utter_goodbye:
+    - text: "Terima kasih sudah mampir ke OlshopKu, kak. Sampai jumpa! 👋"
+    - text: "Sama-sama kak, ditunggu kedatangannya lagi ya! 👋"
+
+  utter_youre_welcome:
+    - text: "Sama-sama kak! Senang bisa membantu 😊"
+
+  utter_iamabot:
+    - text: "Aku Mimin, chatbot (bukan manusia) yang dibangun dengan Rasa + IndoBERT. Kalau perlu admin manusia, ketik \"hubungi admin\" ya kak."
+
+  utter_ask_product:
+    - text: "Produk apa yang mau dicek, kak? Tulis nama produknya ya, misalnya \"iPhone X\" atau \"Lenovo Yoga 920\"."
+
+  utter_ask_order_id:
+    - text: "Boleh minta nomor pesanannya, kak? (5 digit, contoh: 10023)"
+
+  utter_ask_customer_email:
+    - text: "Untuk verifikasi, email yang terdaftar di akun kakak apa?"
+
+  utter_invalid_order_id:
+    - text: "Hmm, \"{order_id}\" bukan format nomor pesanan yang benar, kak. Nomor pesanan terdiri dari 5 digit, contoh 10023."
+
+  utter_invalid_email:
+    - text: "Format email \"{customer_email}\" sepertinya belum benar, kak. Contoh: nama@email.com"
+
+  utter_cancelled:
+    - text: "Oke kak, dibatalkan. Kalau butuh bantuan lain tinggal chat ya."
+
+  utter_delivery_info:
+    - text: "Pengiriman dari gudang OlshopKu di Surabaya memakai JNE, J&T Express, SiCepat, AnterAja, dan Pos Indonesia. Pesanan dikemas di hari yang sama bila masuk sebelum pukul 15.00 WIB. Estimasi tiba 1-3 hari (Jawa) dan 3-7 hari (luar Jawa); ongkir dihitung otomatis saat checkout. Estimasi tiap produk bisa kakak tanyakan, mis. \"info iPhone X\"."
+
+  utter_return_policy:
+    - text: "Kebijakan retur OlshopKu: barang rusak/cacat/salah kirim bisa diretur sesuai masa retur di halaman produk (dari 7 hingga 90 hari, sebagian produk tidak bisa retur). Wajib video unboxing. Pengembalian dana diproses admin 3-7 hari kerja setelah barang kami terima. Masa retur tiap produk bisa dicek dengan \"info <nama produk>\"."
+
+  utter_contact_admin:
+    - text: "Admin manusia OlshopKu siap membantu Senin-Sabtu 08.00-20.00 WIB lewat WhatsApp 0812-0000-0000 (nomor contoh) atau email cs@olshopku.example. Sertakan nomor pesanan bila ada ya kak."
+
+  utter_transaction_out_of_scope:
+    - text: "Maaf kak, Mimin hanya melayani informasi (stok, harga, produk, status pesanan, data akun). Pemesanan dan pembayaran dilakukan lewat checkout di website OlshopKu; kendala pembayaran silakan hubungi admin manusia ya 🙏"
+
+  utter_out_of_scope:
+    - text: "Maaf kak, itu di luar layanan Mimin 😅. Mimin bisa bantu cek stok, harga, info produk, kategori, status pesanan, dan data akun."
+
+  utter_please_rephrase:
+    - text: "Maaf kak, Mimin belum paham maksudnya 🙏 Bisa diulang dengan kalimat lain? Contoh: \"stok iPhone X ada?\" atau \"status pesanan 10023\"."
+
+  utter_default:
+    - text: "Maaf kak, Mimin belum bisa memproses itu. Coba tanya soal stok, harga, atau status pesanan ya."
+
+  utter_api_error:
+    - text: "Maaf kak, sistem toko sedang gangguan sehingga data belum bisa diambil. Coba lagi sebentar lagi ya 🙏"
+
+session_config:
+  session_expiration_time: 60
+  # false: email/nomor pesanan tidak terbawa ke sesi baru (privasi)
+  carry_over_slots_to_new_session: false

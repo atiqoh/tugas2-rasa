@@ -1,0 +1,6 @@
+text,intent,model_text,pred,confidence
+"hai, ada yang jaga toko?",greet,"hai , ada yang jaga toko ?",contact_admin,0.985
+"tidak, terima kasih",deny,"tidak , terima kasih",thank_you,0.921
+vivo v9 sisa brp unit?,check_stock,<product> sisa berapa unit ?,ask_price,0.92
+berapa duit buat beli realme c35?,ask_price,berapa duit buat beli <product> ?,transaction_out_of_scope,0.992
+i want to talk to a human,contact_admin,i want to talk to a human,bot_challenge,0.686

@@ -1,0 +1,45 @@
+erDiagram
+  CUSTOMERS ||--o{ ORDERS : "memiliki"
+  ORDERS ||--|{ ORDER_ITEMS : "berisi"
+  PRODUCTS ||--o{ ORDER_ITEMS : "dipesan dalam"
+  CATEGORIES ||--o{ PRODUCTS : "mengelompokkan"
+  CUSTOMERS {
+    int customer_id PK
+    varchar customer_name
+    varchar email UK
+    varchar phone
+    varchar city
+    datetime created_at
+  }
+  ORDERS {
+    int order_id PK
+    int customer_id FK
+    datetime order_date
+    enum order_status
+    varchar courier
+    varchar tracking_number
+    date estimated_delivery
+    bigint total_amount_idr
+  }
+  ORDER_ITEMS {
+    int order_item_id PK
+    int order_id FK
+    int product_id FK
+    int quantity
+    int unit_price_idr
+  }
+  PRODUCTS {
+    int product_id PK
+    varchar title
+    varchar brand
+    varchar category_slug FK
+    int price_idr
+    decimal discount_percent
+    int stock
+    varchar warranty_info
+    varchar return_policy
+  }
+  CATEGORIES {
+    varchar category_slug PK
+    varchar category_name
+  }

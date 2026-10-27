@@ -1,0 +1,85 @@
+bitext_row,bitext_intent,bitext_flags,source_text_en,text_id,target_intent
+25353,track_order,BE,I do not know how to track order {{Order Number}},saya tidak tahu cara melacak pesanan <order_id>,check_order_status
+25255,track_order,BQZ,want asistance checking the eta of the order {{Order Number}},mau minta bantuan cek estimasi sampai pesanan <order_id>,check_order_status
+24983,track_order,BL,I need help seeing purchase {{Order Number}} status,saya butuh bantuan lihat status pembelian <order_id>,check_order_status
+25509,track_order,BQZ,need help to check  the ETA of the order {{Order Number}},butuh bantuan buat cek estimasi tiba pesanan <order_id>,check_order_status
+24995,track_order,BL,help checking the ETA of the purchase {{Order Number}},tolong bantu cek kapan pesanan <order_id> sampai,check_order_status
+25389,track_order,BLQ,help to see the ETA of purchase {{Order Number}},bantu lihat estimasi pengiriman order <order_id> dong,check_order_status
+25200,track_order,BQZ,wanna chec order {{Order Number}} status,mau cekk status order <order_id>,check_order_status
+25660,track_order,BILQZ,wqhere to see purchase {{Order Number}} current status,dmn bisa liat status terkini pesanan <order_id>,check_order_status
+25344,track_order,BQ,want assistance checking the eta of order {{Order Number}},mau minta tolong cek estimasi pesanan <order_id>,check_order_status
+25620,track_order,BL,see the ETA of purchase {{Order Number}},lihat estimasi sampai pesanan <order_id>,check_order_status
+24964,track_order,BL,help me seeing the ETA of the purchase {{Order Number}},bantu saya lihat estimasi tiba pembelian <order_id>,check_order_status
+25453,track_order,BL,I don't know how to locate order {{Order Number}},saya gak tahu cara nyari posisi pesanan <order_id>,check_order_status
+25481,track_order,BL,I want to check the ETA of the purchase {{Order Number}},saya mau cek kapan pesanan <order_id> tiba,check_order_status
+25858,track_order,BILQ,can ya help me to check the ETA of the order {{Order Number}},bisa bantu cek estimasi pesanan <order_id> gak?,check_order_status
+25479,track_order,BLNQ,i cant see the status of order {{Order Number}},saya ga bisa lihat status pesanan <order_id>,check_order_status
+25585,track_order,BCIL,"I need to track purchase {{Order Number}}, how to do it?","saya perlu lacak pesanan <order_id>, caranya gimana?",check_order_status
+13115,delivery_period,BLQ,i try to see how soon can i expect the shipment,saya mau tahu berapa lama paketnya sampai,ask_delivery_info
+13602,delivery_period,BLQZ,need assistnce to see how soon can I expect the purchase,butuh bantuan cek kira2 kapan barangnya nyampe,ask_delivery_info
+13636,delivery_period,BL,I don't know how to see when my item is going to arrive,saya gak tahu cara cek kapan barang saya datang,ask_delivery_info
+13681,delivery_period,BLQ,i dont know how to see when will my item arrive,gimana cara tau kapan barang saya sampai,ask_delivery_info
+13719,delivery_period,BCIL,"I have to see when will my product arrive, can you help me?","saya harus tahu kapan produknya tiba, bisa bantu?",ask_delivery_info
+13706,delivery_period,BILQ,can uhelp me check how soon can i expect my article,bisa bantu cek berapa lama barang sampai?,ask_delivery_info
+13771,delivery_period,BIL,can you show me how long it takes for the article to arrive?,pengiriman biasanya berapa hari sampai?,ask_delivery_info
+13873,delivery_period,BL,I don't know how to check when will my purchase arrive,gimana cara cek estimasi barang sampai,ask_delivery_info
+13427,delivery_period,BELZ,I do not know wha to do to check when will my product arrive,saya gak tau hrs gimana buat cek kapan produknya sampai,ask_delivery_info
+12463,delivery_options,BLMQ,i dont know how i can check what delivery methods i have,saya gak tahu bisa pakai metode pengiriman apa aja,ask_delivery_info
+12024,delivery_options,BIL,where can I find information about the methods for shipping?,info metode pengiriman bisa dilihat di mana?,ask_delivery_info
+12069,delivery_options,BIS,can I place an order from {{Delivery Country}}?,bisa kirim ke luar kota?,ask_delivery_info
+12501,delivery_options,BCIL,"I want to check the shipment methods, how can I do it?","saya mau cek pilihan ekspedisi, caranya gimana?",ask_delivery_info
+12890,delivery_options,BCILP,"I have to check the shipping options, will you help me?","saya perlu cek opsi pengiriman, bisa dibantu?",ask_delivery_info
+12124,delivery_options,BCIM,"I want to check what delivery options I have, how to do it?",pilihan kurirnya apa aja ya?,ask_delivery_info
+12239,delivery_options,BCL,"I want to check the shipping options, I need help","mau cek opsi pengiriman, butuh bantuan",ask_delivery_info
+12150,delivery_options,BCIL,"I need to check the shipping methods, can I get some help?","saya perlu cek metode pengiriman, bisa minta bantuan?",ask_delivery_info
+12346,delivery_options,BCIL,"I need to see the delivery options, how do I do it?",ekspedisi yang tersedia apa saja?,ask_delivery_info
+6540,check_refund_policy,BLQ,assistance to see in which cases can i ask for refunds,dalam kondisi apa saya bisa minta refund?,ask_return_policy
+6898,check_refund_policy,BCQ,wanna check how long refunds usually take help me,biasanya proses refund berapa lama? bantu dong,ask_return_policy
+6063,check_refund_policy,BIL,can I see in what cases can I ask for reimbursements?,kapan saja saya boleh minta pengembalian dana?,ask_return_policy
+6004,check_refund_policy,BL,check in what situations can I request a reimbursement,cek situasi apa yang bisa ajukan pengembalian dana,ask_return_policy
+5956,check_refund_policy,BL,help to see in what cases can I ask for my money back,bantu lihat kapan saya bisa minta uang kembali,ask_return_policy
+6699,check_refund_policy,BLQZ,show me in which situations  can i ask for refunds,tunjukin kondisi yang bisa minta refund,ask_return_policy
+6090,check_refund_policy,BLPQZ,I'd like to see in which situations can i ask for reunds,saya mau lihat kebijakan refudn nya,ask_return_policy
+6016,check_refund_policy,BLZ,help me check in which casesx can I ask for reimbursements,bantu cek kasus apa aja yg bisa refund,ask_return_policy
+6127,check_refund_policy,BLQ,help me to check in which cases can i ask for reimbursements,tolong cek syarat pengembalian dana,ask_return_policy
+6184,check_refund_policy,BLQ,i have to see in what situations can i ask for refunds,saya perlu tahu aturan retur barang,ask_return_policy
+6461,check_refund_policy,BLQ,help checking in what cases can i request to be refunded,dalam kasus apa barang bisa dikembalikan?,ask_return_policy
+5940,check_refund_policy,BQ,want assistance to check how long refunds take,mau tanya refund biasanya berapa lama,ask_return_policy
+9121,contact_human_agent,BLQ,i want help chatting with an assistant,saya mau chat sama admin,contact_admin
+9606,contact_human_agent,BL,I don't know how I can speak with an operator,gimana caranya ngobrol sama operator?,contact_admin
+9640,contact_human_agent,BL,I don't know what I need to do to speak to someone,saya mau bicara dengan orang langsung,contact_admin
+9688,contact_human_agent,BEL,I cannot talk to an operator,saya tidak bisa menghubungi operator,contact_admin
+9727,contact_human_agent,BL,I need to speak with a live agent,saya perlu bicara dengan CS manusia,contact_admin
+9714,contact_human_agent,BL,I want help talking with a person,tolong sambungkan ke admin asli,contact_admin
+9781,contact_human_agent,BCEIL,"I do not understand you, can you help me talk to a person?","kamu gak ngerti, bisa sambungkan ke manusia?",contact_admin
+9886,contact_human_agent,BCLZ,"I don't understand you, I need to talk to a liev agent","saya gak paham, mau ngomong sama admin langsung",contact_admin
+8124,contact_customer_service,BCLZ,"I have to contact customer support, I need assistnace",saya harus hubungi customer service,contact_admin
+8892,contact_customer_service,BLQ,i have to see what hours customer support available is,CS buka jam berapa?,contact_admin
+8643,contact_customer_service,BL,show me at what time I can contact customer support,jam berapa saya bisa hubungi admin?,contact_admin
+8757,contact_customer_service,BLQ,want help seeing at what time i can contact customer service,mau tanya jam operasional customer service,contact_admin
+8834,contact_customer_service,BL,I don't know how to speak with customer support,saya gak tahu cara menghubungi CS,contact_admin
+8526,contact_customer_service,BL,help me get in touch with customer support,bantu saya hubungi customer support,contact_admin
+8783,contact_customer_service,BILQ,how to check at what time i can contact customer support,cara cek jam layanan admin gimana?,contact_admin
+8887,contact_customer_service,BIL,how to check at what time I can call customer service?,nomor CS yang bisa ditelepon berapa?,contact_admin
+19518,place_order,BLMQ,i need help to purchase several of ur product,saya mau beli beberapa produk kalian,transaction_out_of_scope
+19876,place_order,BLMQZ,assistance ordering a few ofur article,bantu saya order beberapa barang,transaction_out_of_scope
+19042,place_order,BILMQ,can ya help me shop some articles,bisa bantu saya belanja?,transaction_out_of_scope
+18985,place_order,BILM,can you help me shop several of your product?,bisa bantu saya checkout beberapa produk?,transaction_out_of_scope
+18934,place_order,BLM,earn a few of your product,mau pesan beberapa barang,transaction_out_of_scope
+19680,place_order,BLMQ,want assistance to purchase a few of your product,mau dibantu beli produk,transaction_out_of_scope
+19072,place_order,BQZ,i need help to maake an order,saya butuh bantuan untuk bikin pesanan,transaction_out_of_scope
+18997,place_order,BLMQ,want assistance ordering a few of your article,mau order beberapa barang,transaction_out_of_scope
+5124,check_payment_methods,BCIL,"I want to see your payment modalities, can I get some help?","saya mau lihat metode pembayaran, bisa dibantu?",transaction_out_of_scope
+5606,check_payment_methods,BLQ,I'm trying to list ur accepted payment modalities,pembayaran bisa pakai apa aja?,transaction_out_of_scope
+5639,check_payment_methods,BIL,where can I check what payment options are allowed?,cek opsi pembayaran yang diterima di mana?,transaction_out_of_scope
+5690,check_payment_methods,BEL,I do not know what to do to check the payment methods,saya gak tahu cara cek metode bayar,transaction_out_of_scope
+5731,check_payment_methods,BILQ,how do i see ur accepted payment options,bisa bayar pakai apa saja?,transaction_out_of_scope
+5717,check_payment_methods,BILQ,can ya help me see what payment methods are accepted,bisa transfer bank atau COD?,transaction_out_of_scope
+5783,check_payment_methods,BLQZ,need assistaance to see the accepted payment methods,butuh bantuan cek metode pembayaran,transaction_out_of_scope
+5887,check_payment_methods,BEL,I do not know how to check your payment methods,saya tidak tahu metode pembayaran kalian,transaction_out_of_scope
+18107,payment_issue,BM,I need help to report issues with payment,saya mau lapor masalah pembayaran,transaction_out_of_scope
+18871,payment_issue,BLM,help to inform of troubles with online payments,pembayaran online saya bermasalah,transaction_out_of_scope
+18621,payment_issue,BILQ,how can i inform of an error with payment,gimana cara lapor error saat bayar?,transaction_out_of_scope
+18735,payment_issue,BCILMP,"I can't pay, could you help me report payment errors?","saya gak bisa bayar, tolong bantu",transaction_out_of_scope
+18814,payment_issue,BLMQZ,i want assistance to inform of problwms with payment,mau lapor pembayaran gagal,transaction_out_of_scope
+18503,payment_issue,BLM,I am trying to inform of issues with online payment,saya sudah transfer tapi belum terkonfirmasi,transaction_out_of_scope

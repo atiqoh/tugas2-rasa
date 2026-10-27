@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OlshopKu Chat</title>
+<style>
+  :root {
+    --bg: #f4f1ec; --panel: #ffffff; --ink: #1f2328; --muted: #6b6f76;
+    --bot: #f0ece6; --user: #1f6f5c; --user-ink: #ffffff; --line: #e3ddd4; --accent: #1f6f5c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15171a; --panel: #1d2024; --ink: #e9e7e3; --muted: #9a9ea5;
+            --bot: #262a2f; --user: #2f8f77; --line: #30343a; --accent: #3fb394; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; }
+  .app { max-width: 720px; height: 100dvh; margin: 0 auto; display: flex; flex-direction: column;
+         background: var(--panel); border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  header { padding: 14px 18px; border-bottom: 1px solid var(--line); display: flex; gap: 12px; align-items: center; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #fff;
+            display: grid; place-items: center; font-weight: 700; }
+  header h1 { font-size: 16px; margin: 0; }
+  header p { margin: 0; font-size: 12.5px; color: var(--muted); }
+  #log { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 82%; padding: 9px 13px; border-radius: 14px; white-space: pre-wrap; word-wrap: break-word; }
+  .bot { background: var(--bot); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .user { background: var(--user); color: var(--user-ink); align-self: flex-end; border-bottom-right-radius: 4px; }
+  .err { background: transparent; border: 1px dashed #c0533a; color: #c0533a; align-self: center; font-size: 13px; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 6px; align-self: flex-start; }
+  .buttons button { border: 1px solid var(--accent); color: var(--accent); background: transparent;
+                    border-radius: 999px; padding: 5px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+  .buttons button:hover { background: var(--accent); color: #fff; }
+  .typing { color: var(--muted); font-size: 13px; align-self: flex-start; }
+  form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+  input { flex: 1; min-width: 0; padding: 11px 14px; border-radius: 999px; border: 1px solid var(--line);
+          background: var(--bg); color: var(--ink); font: inherit; }
+  form button { border: 0; border-radius: 999px; padding: 0 18px; background: var(--accent); color: #fff; font: inherit; cursor: pointer; }
+  footer { text-align: center; font-size: 11.5px; color: var(--muted); padding: 0 12px 10px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="avatar">M</div>
+    <div>
+      <h1>Mimin &middot; Admin Virtual OlshopKu</h1>
+      <p>Cek stok, harga, info produk, status pesanan &amp; data akun. Tidak melayani pembayaran.</p>
+    </div>
+  </header>
+  <div id="log" aria-live="polite"></div>
+  <form id="f" autocomplete="off">
+    <input id="q" placeholder="Ketik pesan, mis. &quot;iPhone X ready kak?&quot;" maxlength="500" required>
+    <button>Kirim</button>
+  </form>
+  <footer>Toko fiktif untuk tugas kuliah &middot; data dari DummyJSON &middot; NLU IndoBERT + Rasa</footer>
+</div>
+<script>
+  const log = document.getElementById('log');
+  const input = document.getElementById('q');
+  let sender;
+  try { sender = sessionStorage.getItem('olshop-sender'); } catch (e) {}
+  if (!sender) {
+    sender = 'web-' + Math.random().toString(36).slice(2, 10);
+    try { sessionStorage.setItem('olshop-sender', sender); } catch (e) {}
+  }
+
+  function add(cls, text) {
+    const d = document.createElement('div');
+    d.className = 'msg ' + cls;
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+    return d;
+  }
+
+  function addButtons(buttons) {
+    const wrap = document.createElement('div');
+    wrap.className = 'buttons';
+    for (const b of buttons) {
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.textContent = b.title;
+      el.onclick = () => { wrap.remove(); send(b.payload, b.title); };
+      wrap.appendChild(el);
+    }
+    log.appendChild(wrap);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  async function send(message, shown) {
+    add('user', shown || message);
+    const typing = document.createElement('div');
+    typing.className = 'typing';
+    typing.textContent = 'Mimin sedang mengetik…';
+    log.appendChild(typing);
+    try {
+      const r = await fetch('/chat', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sender, message }),
+      });
+      const body = await r.json();
+      typing.remove();
+      if (!body.success) return add('err', body.error.message);
+      if (body.data.length === 0) add('err', '(bot tidak membalas)');
+      for (const m of body.data) {
+        if (m.text) add('bot', m.text);
+        if (m.buttons && m.buttons.length) addButtons(m.buttons);
+      }
+    } catch (e) {
+      typing.remove();
+      add('err', 'Gagal menghubungi server: ' + e.message);
+    }
+  }
+
+  document.getElementById('f').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    send(text);
+  });
+
+  send('halo', 'halo');
+</script>
+</body>
+</html>

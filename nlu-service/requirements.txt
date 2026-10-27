@@ -1,0 +1,12 @@
+# NLU service (Python 3.11, venv TERPISAH dari Rasa agar dependensi tidak bentrok)
+# Mac Apple Silicon (M1-M4): cukup `uv pip install -r requirements.txt` (GPU via MPS).
+# Mac Intel: PyTorch berhenti merilis wheel macOS x86_64 setelah 2.2.2, jadi jalankan dulu:
+#   uv pip install "torch==2.2.2" "numpy<2"
+torch>=2.2
+transformers>=4.44,<5
+flask>=3.0
+pandas>=2.0
+scikit-learn>=1.3
+matplotlib>=3.7
+openpyxl>=3.1
+requests>=2.31

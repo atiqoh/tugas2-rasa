@@ -1,0 +1,38 @@
+sequenceDiagram
+  autonumber
+  actor P as Pembeli
+  participant R as Rasa Core
+  participant N as NLU service
+  participant V as validate_order_status_form
+  participant A as action_check_order_status
+  participant S as api-service (Node)
+  participant D as MySQL MAMP
+  P->>R: "What is the status of my order?"
+  R->>N: POST /model/parse
+  N-->>R: intent check_order_status (0.97), entities []
+  R->>R: RulePolicy: aktifkan order_status_form
+  R-->>P: utter_ask_order_id
+  P->>R: "nomornya 123"
+  R->>N: POST /model/parse
+  N-->>R: intent provide_order_id, entities []
+  R->>V: from_text "nomornya 123"
+  V-->>R: order_id = None + utter_invalid_order_id
+  R-->>P: "Nomor pesanan terdiri dari 5 digit..."
+  P->>R: "#35;10003"
+  R->>N: POST /model/parse
+  N-->>R: provide_order_id, entity order_id=10003
+  R->>V: validate_order_id("10003") OK
+  R-->>P: utter_ask_customer_email
+  P->>R: "sophia.brown@x.dummyjson.com"
+  R->>N: POST /model/parse
+  N-->>R: provide_email, entity email
+  R->>V: validate_customer_email OK
+  R->>R: form selesai (requested_slot = null)
+  R->>A: jalankan custom action
+  A->>S: GET /api/orders/10003?email=...
+  S->>D: SELECT order JOIN customers + items
+  D-->>S: baris pesanan
+  S->>S: cek email = pemilik? (404 seragam bila tidak)
+  S-->>A: 200 JSON status, kurir, resi, item
+  A-->>R: utter_message(teks) + SlotSet(order_id, None)
+  R-->>P: "Pesanan #35;10003 a.n. Sophia Brown, Status: Dalam pengiriman..."

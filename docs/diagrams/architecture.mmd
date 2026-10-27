@@ -1,0 +1,21 @@
+flowchart LR
+  U([Pembeli]) -->|chat| UI[UI Chat web<br/>localhost:4000]
+  UI -->|POST /chat| API
+  subgraph RASA[Rasa Pro :5005]
+    direction TB
+    NCA[NLUCommandAdapter<br/>pipeline config.yml] --> TR[Tracker<br/>slot, form, riwayat]
+    TR --> POL[Policies<br/>Rule / Memoization / TED]
+    POL --> ACT[Custom Actions<br/>actions.py]
+  end
+  API[api-service Node.js<br/>Express :4000] -->|REST webhook| RASA
+  RASA -->|POST /model/parse<br/>endpoints.yml nlu.url| NLU
+  subgraph NLU[NLU service Flask :3000]
+    direction TB
+    EX[Entity extractor<br/>regex + gazetteer + fuzzy] --> NORM[Normalisasi<br/>slang, placeholder]
+    NORM --> BERT[IndoBERT fine-tuned<br/>19 intent + fallback]
+  end
+  ACT -->|HTTP GET JSON| API
+  API -->|SQL mysql2| DB[(MySQL MAMP :8889<br/>olshop_db)]
+  TRAIN[[train_intent_model.py<br/>di luar Rasa]] -.->|model + tokenizer| BERT
+  DS[(Dataset: Bitext CDLA-S<br/>+ DummyJSON MIT)] -.-> TRAIN
+  DS -.-> DB

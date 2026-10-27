@@ -1,0 +1,155 @@
+text,intent
+"halo kakk, selamat sore",greet
+"pagiii min, lagi online?",greet
+"hai, ada yang jaga toko?",greet
+"assalamualaikum admin",greet
+"permisi kak numpang tanya",greet
+"helo",greet
+"malam min",greet
+"good morning",greet
+"oke deh segitu dulu, dadahh",goodbye
+"sampai jumpa lagi min",goodbye
+"udah ya kak, saya cabut dulu",goodbye
+"see you kak",goodbye
+"sekian dulu, terima kasih dan sampai nanti",goodbye
+"daah",goodbye
+"ok bye",goodbye
+"pamit ya",goodbye
+"iya bener",affirm
+"yap betul kak",affirm
+"boleh banget",affirm
+"oke lanjut",affirm
+"iyaa mau",affirm
+"siap kak",affirm
+"yes",affirm
+"bener itu",affirm
+"enggak deh",deny
+"ga jadi kak",deny
+"batalin aja",deny
+"nggak usah",deny
+"tidak, terima kasih",deny
+"no",deny
+"udah ga ada lagi",deny
+"jangan dulu",deny
+"makasih banyak ya kak infonya",thank_you
+"thank u min",thank_you
+"terima kasih, sangat membantu",thank_you
+"mksh kak",thank_you
+"sip, thanks ya",thank_you
+"wah makasih",thank_you
+"nuhun kak",thank_you
+"terimakasih admin",thank_you
+"ini yang bales robot ya?",bot_challenge
+"kamu orang beneran bukan?",bot_challenge
+"are you a bot?",bot_challenge
+"ini chat otomatis ya kak?",bot_challenge
+"saya lagi ngobrol sama AI?",bot_challenge
+"admin ini manusia atau mesin",bot_challenge
+"kamu bot bukan",bot_challenge
+"siapa yang balas chat ini, robot?",bot_challenge
+"kak iphone x ready ga?",check_stock
+"stok samsung galaxy s8 masih ada?",check_stock
+"Rolex Submariner masih tersedia kak?",check_stock
+"apakah lenovo yoga 920 ready stock",check_stock
+"is the kawasaki z800 in stock?",check_stock
+"vivo v9 sisa brp unit?",check_stock
+"barang volleyball udah habis ya?",check_stock
+"min cek ketersediaan nike air jordan dong",check_stock
+"redmi note 13 ready gak kak",check_stock
+"oppo k1 masih ada stoknya?",check_stock
+"harga macbook pro brp kak?",ask_price
+"iphone 13 pro dibandrol berapa ya",ask_price
+"berapa duit buat beli realme c35?",ask_price
+"how much is the dior j'adore?",ask_price
+"rolex datejust lagi diskon gak?",ask_price
+"kak harga gucci bloom berapaan sekarang",ask_price
+"xiaomi 14 harganya brp min",ask_price
+"price list samsung galaxy tab white dong",ask_price
+"spesifikasi asus zenbook pro gimana kak",ask_product_info
+"garansi apple airpods berapa lama?",ask_product_info
+"huawei matebook x pro bagus ga sih",ask_product_info
+"jelasin dong tentang kawasaki z800",ask_product_info
+"red lipstick itu merek apa?",ask_product_info
+"rating vivo x21 berapa kak",ask_product_info
+"tell me more about the prada women bag",ask_product_info
+"iphone 6 bisa diretur gak kalau rusak?",ask_product_info
+"kak jual laptop apa aja?",browse_category
+"ada parfum apa saja di toko ini",browse_category
+"liat koleksi sepatu wanita dong",browse_category
+"toko kakak jual apa aja sih?",browse_category
+"show me your smartphones",browse_category
+"ada kategori apa aja min",browse_category
+"mau lihat-lihat alat olahraga",browse_category
+"rekomendasi jam tangan pria dong",browse_category
+"pesanan 10023 udah sampe mana ya kak",check_order_status
+"what is the status of my order?",check_order_status
+"paket saya kok belum nyampe juga",check_order_status
+"resi order #10045 udah ada belum?",check_order_status
+"tolong cek orderan ORD-10101",check_order_status
+"barang yg sy beli minggu lalu udh dikirim?",check_order_status
+"status pesanan saya apa sekarang",check_order_status
+"kapan paket 10150 diantar kurir?",check_order_status
+"saya mau lihat data akun saya",check_customer_data
+"tolong tampilkan riwayat transaksi saya",check_customer_data
+"data saya yang tersimpan di toko apa aja",check_customer_data
+"show my account details",check_customer_data
+"akun saya terdaftar atas nama siapa ya",check_customer_data
+"histori belanja saya mana",check_customer_data
+"cek profil pelanggan pakai emily.johnson@x.dummyjson.com",check_customer_data
+"saya pernah beli apa aja di sini?",check_customer_data
+"10023",provide_order_id
+"nomornya 10045 kak",provide_order_id
+"ORD-10101",provide_order_id
+"no order saya #10150",provide_order_id
+"itu pesanan nomor 10007",provide_order_id
+"id pesanannya 10088",provide_order_id
+"order 10120 ya",provide_order_id
+"kode ordernya 10002",provide_order_id
+"emily.johnson@x.dummyjson.com",provide_email
+"email sy michael.williams@x.dummyjson.com",provide_email
+"pake email sophia.brown@x.dummyjson.com kak",provide_email
+"my email is james.davis@x.dummyjson.com",provide_email
+"alamat emailnya emma.miller@x.dummyjson.com",provide_email
+"ini emailku: olivia.wilson@x.dummyjson.com",provide_email
+"terdaftar dengan alexander.jones@x.dummyjson.com",provide_email
+"ava.taylor@x.dummyjson.com ya kak",provide_email
+"pengiriman ke medan berapa hari kak?",ask_delivery_info
+"bisa kirim pake sicepat?",ask_delivery_info
+"ada layanan same day ga?",ask_delivery_info
+"ongkos kirim ke bandung brp",ask_delivery_info
+"kurirnya bisa pilih sendiri?",ask_delivery_info
+"barang dikirim dari kota mana?",ask_delivery_info
+"how long is the shipping?",ask_delivery_info
+"pengiriman hari libur tetap jalan?",ask_delivery_info
+"kalau barangnya cacat bisa dikembalikan?",ask_return_policy
+"aturan tukar barang gimana kak",ask_return_policy
+"salah ukuran boleh tukar ga",ask_return_policy
+"prosedur retur nya seperti apa",ask_return_policy
+"what is your return policy?",ask_return_policy
+"uang bisa balik kalau barang rusak?",ask_return_policy
+"syarat pengembalian barang apa aja",ask_return_policy
+"refund butuh waktu berapa hari",ask_return_policy
+"aku mau ngobrol sama admin manusia aja",contact_admin
+"minta nomor whatsapp toko dong",contact_admin
+"CS nya bisa ditelpon gak?",contact_admin
+"sambungin ke petugas dong",contact_admin
+"jam kerja admin sampai jam berapa",contact_admin
+"i want to talk to a human",contact_admin
+"email toko kalian apa ya",contact_admin
+"tolong panggilin adminnya",contact_admin
+"saya mau bayar pake gopay bisa?",transaction_out_of_scope
+"nomor rekening tokonya berapa",transaction_out_of_scope
+"tolong buatin pesanan iphone x 2 biji",transaction_out_of_scope
+"bisa cicilan 0% ga kak",transaction_out_of_scope
+"saya udah bayar tapi status belum berubah",transaction_out_of_scope
+"checkout gimana caranya",transaction_out_of_scope
+"can i pay with credit card?",transaction_out_of_scope
+"masukin red lipstick ke keranjang saya",transaction_out_of_scope
+"cuaca jakarta hari ini gimana",out_of_scope
+"siapa presiden indonesia sekarang",out_of_scope
+"bikinin puisi cinta dong",out_of_scope
+"resep rendang yang enak apa",out_of_scope
+"skor bola tadi malam berapa",out_of_scope
+"tolong kerjain pr matematika saya",out_of_scope
+"what is the capital of france",out_of_scope
+"rekomendasi film horor terbaru",out_of_scope

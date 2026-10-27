@@ -1,0 +1,12 @@
+{
+  "validation": {
+    "accuracy": 0.9868,
+    "macro_f1": 0.9868,
+    "below_threshold": 0.0285
+  },
+  "heldout": {
+    "accuracy": 0.9545,
+    "macro_f1": 0.9542,
+    "below_threshold": 0.1039
+  }
+}

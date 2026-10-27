@@ -1,0 +1,79 @@
+version: "3.1"
+
+# Stories = contoh alur percakapan multi-turn untuk MemoizationPolicy & TEDPolicy.
+# Setiap langkah konsisten dengan rules.yml (RulePolicy akan menolak training bila
+# ada story yang bertentangan dengan rule).
+stories:
+
+  - story: Sapa, cek stok dengan nama produk, lalu tanya harga (konteks produk diingat)
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: check_stock
+        entities:
+          - product: "iPhone X"
+      - action: product_form
+      - active_loop: product_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_product_lookup
+      - action: utter_anything_else
+      - intent: affirm
+      - action: utter_how_can_help
+      - intent: ask_price
+      - action: product_form
+      - active_loop: product_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_product_lookup
+      - action: utter_anything_else
+      - intent: deny
+      - action: utter_goodbye
+
+  - story: Status pesanan - identitas ditanyakan satu per satu (slot filling)
+    steps:
+      - intent: check_order_status
+      - action: order_status_form
+      - active_loop: order_status_form
+      - slot_was_set:
+          - requested_slot: order_id
+      - intent: provide_order_id
+        entities:
+          - order_id: "10023"
+      - action: order_status_form
+      - slot_was_set:
+          - requested_slot: customer_email
+      - intent: provide_email
+        entities:
+          - email: "chloe.morales@x.dummyjson.com"
+      - action: order_status_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_check_order_status
+      - action: utter_anything_else
+      - intent: thank_you
+      - action: utter_youre_welcome
+
+  - story: Data akun diminta lalu dibatalkan
+    steps:
+      - intent: check_customer_data
+      - action: customer_data_form
+      - active_loop: customer_data_form
+      - slot_was_set:
+          - requested_slot: customer_email
+      - intent: deny
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_cancelled
+
+  - story: Tanya pengiriman lalu retur lalu pamit
+    steps:
+      - intent: ask_delivery_info
+      - action: utter_delivery_info
+      - intent: ask_return_policy
+      - action: utter_return_policy
+      - intent: goodbye
+      - action: utter_goodbye

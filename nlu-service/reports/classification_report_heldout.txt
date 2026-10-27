@@ -1,0 +1,25 @@
+                          precision    recall  f1-score   support
+
+                  affirm      1.000     1.000     1.000         8
+       ask_delivery_info      1.000     1.000     1.000         8
+               ask_price      0.875     0.875     0.875         8
+        ask_product_info      1.000     1.000     1.000         8
+       ask_return_policy      1.000     1.000     1.000         8
+           bot_challenge      0.889     1.000     0.941         8
+         browse_category      1.000     1.000     1.000         8
+     check_customer_data      1.000     1.000     1.000         8
+      check_order_status      1.000     1.000     1.000         8
+             check_stock      1.000     0.900     0.947        10
+           contact_admin      0.875     0.875     0.875         8
+                    deny      1.000     0.875     0.933         8
+                 goodbye      1.000     1.000     1.000         8
+                   greet      1.000     0.875     0.933         8
+            out_of_scope      1.000     1.000     1.000         8
+           provide_email      1.000     1.000     1.000         8
+        provide_order_id      1.000     1.000     1.000         8
+               thank_you      0.889     1.000     0.941         8
+transaction_out_of_scope      0.889     1.000     0.941         8
+
+                accuracy                          0.968       154
+               macro avg      0.969     0.968     0.968       154
+            weighted avg      0.970     0.968     0.968       154

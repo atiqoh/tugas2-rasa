@@ -1,0 +1,179 @@
+version: "3.1"
+
+# Rules = perilaku deterministik (selalu sama untuk kondisi yang sama).
+rules:
+
+  # --------------------------------------------------------------- percakapan umum
+  - rule: Sapa pengguna
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Pamit
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Terima kasih
+    steps:
+      - intent: thank_you
+      - action: utter_youre_welcome
+
+  - rule: Ditanya apakah bot
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Masih ada pertanyaan
+    steps:
+      - action: utter_anything_else
+      - intent: affirm
+      - action: utter_how_can_help
+
+  - rule: Tidak ada pertanyaan lagi
+    steps:
+      - action: utter_anything_else
+      - intent: deny
+      - action: utter_goodbye
+
+  # ------------------------------------------------------------ FAQ statis toko
+  - rule: Info pengiriman
+    steps:
+      - intent: ask_delivery_info
+      - action: utter_delivery_info
+
+  - rule: Kebijakan retur
+    steps:
+      - intent: ask_return_policy
+      - action: utter_return_policy
+
+  - rule: Kontak admin manusia
+    steps:
+      - intent: contact_admin
+      - action: utter_contact_admin
+
+  - rule: Pemesanan/pembayaran di luar cakupan bot
+    steps:
+      - intent: transaction_out_of_scope
+      - action: utter_transaction_out_of_scope
+
+  - rule: Pertanyaan di luar topik toko
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+
+  - rule: Confidence NLU rendah (nlu_fallback dari NLU service)
+    steps:
+      - intent: nlu_fallback
+      - action: utter_please_rephrase
+
+  # --------------------------------------------------------- katalog & kategori
+  - rule: Lihat kategori / produk per kategori
+    steps:
+      - intent: browse_category
+      - action: action_browse_category
+
+  # ------------------------------------------------- produk: stok / harga / info
+  - rule: Aktifkan form produk - cek stok
+    steps:
+      - intent: check_stock
+      - action: product_form
+      - active_loop: product_form
+
+  - rule: Aktifkan form produk - tanya harga
+    steps:
+      - intent: ask_price
+      - action: product_form
+      - active_loop: product_form
+
+  - rule: Aktifkan form produk - info produk
+    steps:
+      - intent: ask_product_info
+      - action: product_form
+      - active_loop: product_form
+
+  - rule: Form produk selesai -> cari ke database
+    condition:
+      - active_loop: product_form
+    steps:
+      - action: product_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_product_lookup
+      - action: utter_anything_else
+
+  - rule: Batal di tengah form produk
+    condition:
+      - active_loop: product_form
+    steps:
+      - intent: deny
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_cancelled
+
+  # ------------------------------------------------------------ status pesanan
+  - rule: Aktifkan form status pesanan
+    steps:
+      - intent: check_order_status
+      - action: order_status_form
+      - active_loop: order_status_form
+
+  - rule: Nomor pesanan dikirim langsung -> cek status
+    steps:
+      - intent: provide_order_id
+      - action: order_status_form
+      - active_loop: order_status_form
+
+  - rule: Form status pesanan selesai -> tanya external service
+    condition:
+      - active_loop: order_status_form
+    steps:
+      - action: order_status_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_check_order_status
+      - action: utter_anything_else
+
+  - rule: Batal di tengah form status pesanan
+    condition:
+      - active_loop: order_status_form
+    steps:
+      - intent: deny
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_cancelled
+
+  # -------------------------------------------------------------- data pelanggan
+  - rule: Aktifkan form data pelanggan
+    steps:
+      - intent: check_customer_data
+      - action: customer_data_form
+      - active_loop: customer_data_form
+
+  - rule: Email dikirim langsung -> tampilkan data akun
+    steps:
+      - intent: provide_email
+      - action: customer_data_form
+      - active_loop: customer_data_form
+
+  - rule: Form data pelanggan selesai -> tanya external service
+    condition:
+      - active_loop: customer_data_form
+    steps:
+      - action: customer_data_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_check_customer_data
+      - action: utter_anything_else
+
+  - rule: Batal di tengah form data pelanggan
+    condition:
+      - active_loop: customer_data_form
+    steps:
+      - intent: deny
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_cancelled

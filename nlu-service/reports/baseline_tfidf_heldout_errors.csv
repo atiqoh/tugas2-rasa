@@ -1,0 +1,8 @@
+text,intent,model_text,pred,confidence
+"hai, ada yang jaga toko?",greet,"hai , ada yang jaga toko ?",contact_admin,0.608
+"tidak, terima kasih",deny,"tidak , terima kasih",thank_you,0.975
+berapa duit buat beli realme c35?,ask_price,berapa duit buat beli <product> ?,transaction_out_of_scope,0.356
+cek profil pelanggan pakai emily.johnson@x.dummyjson.com,check_customer_data,cek profil pelanggan pakai <email>,provide_email,0.6
+terdaftar dengan alexander.jones@x.dummyjson.com,provide_email,terdaftar dengan <email>,check_customer_data,0.578
+saya udah bayar tapi status belum berubah,transaction_out_of_scope,saya sudah bayar tapi status belum berubah,check_order_status,0.69
+tolong kerjain pr matematika saya,out_of_scope,tolong kerjain pr matematika saya,transaction_out_of_scope,0.308
